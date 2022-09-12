@@ -24,9 +24,7 @@ app.get("/api/courses", (req, res) => {
 // get one course detail
 app.get("/api/courses/:id", (req, res) => {
     const course = courses.find((c) => c.id === parseInt(req.params.id));
-    if (!course) {
-        res.status(404).send("course not found");
-    }
+    if (!course) return res.status(404).send("course not found");
     res.send(course);
 });
 
@@ -35,10 +33,7 @@ app.post("/api/courses", (req, res) => {
     // const result = validateCourse(req.body)
     // object destructuring
     const {error } = validateCourse(req.body)
-    if (error) {
-        res.status(400).send(result.error.message)
-        return
-    }
+    if (error) return res.status(400).send(result.error.message)
 
     const course = {
         id: courses.length + 1,
@@ -51,19 +46,25 @@ app.post("/api/courses", (req, res) => {
 // update exists course
 app.put('/api/courses/:id', (req, res) => {
     const course = courses.find((c) => c.id === parseInt(req.params.id));
-    if (!course) {
-        res.status(404).send("course not found");
-    }
+    if (!course) return res.status(404).send("course not found");
 
     // const result = validateCourse(req.body)
     // object destructuring
     const {error } = validateCourse(req.body)
-    if (error) {
-        res.status(400).send(result.error.message)
-    }
+    if (error) return res.status(400).send(result.error.message)
 
     course.name = req.body.name
 
+    res.send(course)
+})
+
+// delete course
+app.delete('/api/courses/:id', (req, res) => {
+    const course = courses.find((c) => c.id === parseInt(req.params.id));
+    if (!course) return res.status(404).send("course not found");
+
+    const index = courses.indexOf(course)
+    courses.splice(index, 1)
     res.send(course)
 })
 
