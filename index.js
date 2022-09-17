@@ -1,5 +1,5 @@
 // const debug = require('debug')('app:startup')
-// const config = require('config')
+// const config = require('./config/config')
 // const morgan = require('morgan')
 // const helmet = require('helmet')
 // const logger = require('./middleware/logger')
