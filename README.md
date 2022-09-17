@@ -1,4 +1,12 @@
 # express_courses
 
-npm install
-npm start
+### install requirements:
+```
+% npm install (or) npm i
+```
+
+
+### running project:
+```
+% npm start
+```
